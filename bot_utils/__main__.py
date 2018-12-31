@@ -1,7 +1,7 @@
 import mouse
 
-from misc_scripts.image_template_matching import get_matches_from_screen
-from misc_scripts._app_specific.smt_dx2.exceptions import TemplateImageNotFound
+from bot_utils.image_template_matching import get_matches_from_screen
+from bot_utils.exceptions import TemplateImageNotFound
 
 
 def click(img_path, double_click=False):
