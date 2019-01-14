@@ -1,6 +1,6 @@
 from time import sleep
 
-from bot_utils.__main__ import click, double_click as doubleClick
+from bot_utils import click, double_click as doubleClick
 from bot_utils.decorators import ignore_exception
 from bot_utils.exceptions import TemplateImageNotFound
 from bot_utils.utils import unpack_methods

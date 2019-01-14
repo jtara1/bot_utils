@@ -1,8 +1,8 @@
 from time import sleep, time
 
 from duel import duel
-from misc_scripts._app_specific.smt_dx2.__main__ import click, double_click as doubleClick
-from misc_scripts._app_specific.smt_dx2.images.paths import Images
+from bot_utils import click, double_click as doubleClick
+from examples.smt_dx2.images.paths import Images
 
 # constants
 duel_prep_load = 4
