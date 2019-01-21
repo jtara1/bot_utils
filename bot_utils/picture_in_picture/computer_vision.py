@@ -5,11 +5,10 @@ import pyautogui
 
 
 class ComputerVision:
-    def __init__(self):
-        pass
+    def __init__(self, image_similarity_threshold=0.90):
+        self.image_similarity_threshold = image_similarity_threshold
 
-    @staticmethod
-    def get_matches_from_screen(template_image_path, threshold=0.67, write_output_image=False):
+    def get_matches_from_screen(self, template_image_path, write_output_image=False):
         """finds the bounding box that contains the template image in a screen shot taken
         :returns: tuple of x1, y1, x2, y2
         """
@@ -29,7 +28,7 @@ class ComputerVision:
         w, h = template.shape[::-1]
 
         res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
-        loc = np.where(res >= threshold)
+        loc = np.where(res >= self.image_similarity_threshold)
         regions = []
         for pt in zip(*loc[::-1]):
             # (x1, y1, x2, y2) where x1, y1 is top left, others are bottom right

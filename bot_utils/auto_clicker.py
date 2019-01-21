@@ -1,5 +1,4 @@
 from time import sleep
-import math
 
 import mouse
 
@@ -18,4 +17,4 @@ class AutoClicker(Macro):
 
 
 if __name__ == '__main__':
-    clicker = AutoClicker()
+    clicker = AutoClicker(0.5)
