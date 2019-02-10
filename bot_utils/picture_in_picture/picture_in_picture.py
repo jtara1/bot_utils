@@ -2,15 +2,16 @@ import mouse
 from time import time, sleep
 from os.path import basename
 
-
 from bot_utils import logger
 from bot_utils.picture_in_picture.computer_vision import ComputerVision
+from bot_utils.picture_in_picture.region import Region
 from bot_utils.exceptions import TemplateImageNotFound
 
 
 class PictureInPicture:
-    def __init__(self):
+    def __init__(self, ignore_template_not_found=False):
         """search for a picture in a picture (screenshot) aka does image template matching"""
+        self.ignore_template_not_found = ignore_template_not_found
         self.vision = ComputerVision(image_similarity_threshold=0.95)
 
     def _get_regions(self, img_path):
@@ -21,16 +22,40 @@ class PictureInPicture:
         """image is present"""
         return not not self._get_regions(img_path)
 
+    async def has_image_within_period(self, img_path, time_period=3.5, frequency_for_check=0.1):
+        """image is present within period of time
+
+        :param img_path:
+        :param time_period: in seconds
+        :param frequency_for_check: in seconds
+        :return: bool
+        """
+        start = time()
+        while (time() - start) <= time_period:
+            if self.has_image(img_path):
+                return True
+            sleep(frequency_for_check)
+
+        return False
+
     def click(self, img_path, double_click=False):
         logger.debug('attempting to click %s', basename(img_path))
 
         regions = self._get_regions(img_path)
-        if not regions:
-            raise TemplateImageNotFound('template image not found: {}'.format(img_path))
 
-        region = regions[0]
-        mouse.move(*region.center, duration=0.3)
-        mouse.double_click() if double_click else mouse.click()
+        if not regions:
+            msg = 'template image not found: {}'.format(img_path)
+            if not self.ignore_template_not_found:
+                raise TemplateImageNotFound(msg)
+            logger.debug(msg)
+
+        else:
+            region = regions[0]
+            mouse.move(*region.center, duration=0.3)
+            mouse.double_click() if double_click else mouse.click()
+            return region
+
+        return Region()  # emtpy region / list
 
     def double_click(self, img_path):
         self.click(img_path, True)

@@ -3,9 +3,12 @@ import cv2
 import numpy as np
 import pyautogui
 
+from bot_utils.picture_in_picture.region import Region
+
 
 class ComputerVision:
     def __init__(self, image_similarity_threshold=0.90):
+        """does the actual template matching"""
         self.image_similarity_threshold = image_similarity_threshold
 
     def get_matches_from_screen(self, template_image_path, write_output_image=False):
@@ -32,7 +35,8 @@ class ComputerVision:
         regions = []
         for pt in zip(*loc[::-1]):
             # (x1, y1, x2, y2) where x1, y1 is top left, others are bottom right
-            regions.append(pt + (pt[0] + w, pt[1] + h))
+            coords = list(pt + (pt[0] + w, pt[1] + h))
+            regions.append(Region(coords))
             cv2.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (0, 0, 255), 2)
 
         if write_output_image:

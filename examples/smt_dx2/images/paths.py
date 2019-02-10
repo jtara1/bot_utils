@@ -4,6 +4,7 @@ from os.path import join, dirname
 class Images:
     __dir = dirname(__file__)
     __dir_demons_turn = join(__dir, 'demons_turn')
+    __dir_demons_status = join(__dir, 'demons_status')
 
     # duel lobby
     duel = join(__dir, 'duel.png')
@@ -19,6 +20,10 @@ class Images:
     concentrate = join(__dir, 'concentrate.png')
     pass_turn = join(__dir, 'pass.png')
     tag = join(__dir, 'tag.png')
+    apocalypse = join(__dir, 'apocalypse.PNG')
+
+    # demons status
+    concentrate_status = join(__dir_demons_status, 'concentrate2.PNG')  # alt: 'concentrate.png'
 
     # fame exchange
     exchange_100 = join(__dir, 'ex-100.PNG')
