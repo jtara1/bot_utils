@@ -7,7 +7,7 @@ from examples.smt_dx2.images import Images
 # constants
 class Time:
     ui_load = 1.2
-    processed = 1.2
+    processed = 1.8
 
 
 def get_summon_files(amount=1):

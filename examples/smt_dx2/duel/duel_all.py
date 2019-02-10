@@ -1,5 +1,7 @@
 from time import sleep, time
 
+import mouse
+
 from duel import duel
 from bot_utils import click, double_click as doubleClick
 from examples.smt_dx2.images.paths import Images
@@ -26,9 +28,22 @@ def duel_next():
 
     # exit to duel select lobby
     sleep(duel_end)
+    try:
+        click(Images.lose)
+        print('duel lost')
+    except:
+        print('duel seems to have been won')
+    sleep(12)
     for i in range(3):
         click(Images.next)
         sleep(duel_end_results)
+        mouse.move(-40, -40, absolute=False, duration=0.2)
+        mouse.click()
+        sleep(duel_end_results)
+        try:
+            click(Images.close)
+        except:
+            pass
 
 
 def duel_all(timeout=600):

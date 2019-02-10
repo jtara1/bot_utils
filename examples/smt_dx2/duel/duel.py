@@ -8,7 +8,7 @@ from bot_utils.utils import unpack_methods
 from examples.smt_dx2.images.paths import Images
 
 # constants
-single_attack_time = 3
+single_attack_time = 4
 enemy_turn_time = 11
 
 
