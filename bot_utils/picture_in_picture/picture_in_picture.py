@@ -9,10 +9,10 @@ from bot_utils.exceptions import TemplateImageNotFound
 
 
 class PictureInPicture:
-    def __init__(self, ignore_template_not_found=False):
+    def __init__(self, ignore_template_not_found=False, image_similarity_threshold=0.95):
         """search for a picture in a picture (screenshot) aka does image template matching"""
         self.ignore_template_not_found = ignore_template_not_found
-        self.vision = ComputerVision(image_similarity_threshold=0.95)
+        self.vision = ComputerVision(image_similarity_threshold=image_similarity_threshold)
 
     def _get_regions(self, img_path):
         """finds all instances of the image & returns the regions"""

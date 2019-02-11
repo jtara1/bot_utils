@@ -8,7 +8,7 @@ from examples.smt_dx2.images import Images
 class TestPip(unittest.TestCase):
     """test picture in picture class"""
     def test_pip(self):
-        picture = PictureInPicture()
+        picture = PictureInPicture(ignore_template_not_found=True, image_similarity_threshold=0.50)
         region = picture.click(Images.concentrate_status)
         print(region)
         # self.assertEqual(region.center, (50, 50))

@@ -1,6 +1,6 @@
 import mouse
 
-from bot_utils.image_template_matching import get_matches_from_screen
+from bot_utils.deprecated.image_template_matching import get_matches_from_screen
 from bot_utils.exceptions import TemplateImageNotFound
 
 
