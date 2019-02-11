@@ -5,14 +5,15 @@ from os.path import basename
 from bot_utils import logger
 from bot_utils.picture_in_picture.computer_vision import ComputerVision
 from bot_utils.picture_in_picture.region import Region
+from bot_utils.picture_in_picture.picture_input import Screenshot
 from bot_utils.exceptions import TemplateImageNotFound
 
 
 class PictureInPicture:
-    def __init__(self, ignore_template_not_found=False, image_similarity_threshold=0.95):
+    def __init__(self, ignore_template_not_found=False, image_similarity_threshold=0.95, picture_input=Screenshot()):
         """search for a picture in a picture (screenshot) aka does image template matching"""
         self.ignore_template_not_found = ignore_template_not_found
-        self.vision = ComputerVision(image_similarity_threshold=image_similarity_threshold)
+        self.vision = ComputerVision(image_similarity_threshold=image_similarity_threshold, picture_input=picture_input)
 
     def _get_regions(self, img_path):
         """finds all instances of the image & returns the regions"""
