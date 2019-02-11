@@ -1,15 +1,16 @@
 import os
 import cv2
 import numpy as np
-import pyautogui
 
 from bot_utils.picture_in_picture.region import Region
+from bot_utils.picture_in_picture.picture_input import Screenshot
 
 
 class ComputerVision:
-    def __init__(self, image_similarity_threshold=0.90):
+    def __init__(self, image_similarity_threshold=0.90, picture_input=Screenshot()):
         """does the actual template matching"""
         self.image_similarity_threshold = image_similarity_threshold
+        self.picture_input = picture_input
 
     def get_matches_from_screen(self, template_image_path, write_output_image=False):
         """finds the bounding box that contains the template image in a screen shot taken
@@ -19,7 +20,7 @@ class ComputerVision:
         image_path = 'gmfs_tmp.png'
 
         # take screenshot
-        pyautogui.screenshot(image_path)
+        image_path = self.picture_input.get_image(image_path)
 
         ### Modified Example from OpenCV Template Matching Example ###
         # https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_template_matching/py_template_matching.html
