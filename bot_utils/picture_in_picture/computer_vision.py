@@ -4,11 +4,14 @@ import numpy as np
 
 from bot_utils.picture_in_picture.region import Region
 from bot_utils.picture_in_picture.picture_input import Screenshot
+from bot_utils.utils import DebugAbstractClass
 
 
-class ComputerVision:
+class ComputerVision(DebugAbstractClass):
     def __init__(self, image_similarity_threshold=0.90, picture_input=Screenshot()):
         """does the actual template matching"""
+        super().__init__()
+
         self.image_similarity_threshold = image_similarity_threshold
         self.picture_input = picture_input
 
@@ -38,11 +41,10 @@ class ComputerVision:
             # (x1, y1, x2, y2) where x1, y1 is top left, others are bottom right
             coords = list(pt + (pt[0] + w, pt[1] + h))
             regions.append(Region(coords))
-            cv2.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (0, 0, 255), 2)
+            cv2.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (255, 0, 0), 5)
 
-        if write_output_image:
+        if self.debug or write_output_image:
             cv2.imwrite('res.png', img_rgb)
-        else:
-            os.remove(image_path)
+        os.remove(image_path)
 
         return regions
