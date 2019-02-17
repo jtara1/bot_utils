@@ -1,4 +1,5 @@
 ### My ignores ###
+screenshots/
 
 # config with secrets / private keys
 conan_exiles_event_monitor_secrets.py

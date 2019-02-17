@@ -12,4 +12,5 @@ class PictureInputAbstractClass(DebugAbstractClass):
         self.img_path = img_path
 
     def clean(self):
-        os.remove(self.img_path)
+        if self.img_path:
+            os.remove(self.img_path)

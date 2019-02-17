@@ -16,6 +16,8 @@ class Screenshot(PictureInputAbstractClass):
         os.makedirs(self.screenshots_folder, exist_ok=True)
 
     def get_image(self, save_img_to_path='screenshot.png'):
+        super().get_image(save_img_to_path)
+
         pyautogui.screenshot(save_img_to_path)
         if self.debug:
             extension = basename(save_img_to_path).split('.')[-1]
