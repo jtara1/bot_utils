@@ -5,10 +5,10 @@ from time import time
 
 import pyautogui
 
-from bot_utils.picture_in_picture.picture_input import PictureInputInterface
+from bot_utils.picture_in_picture.picture_input import PictureInputAbstractClass
 
 
-class Screenshot(PictureInputInterface):
+class Screenshot(PictureInputAbstractClass):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

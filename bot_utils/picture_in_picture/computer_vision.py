@@ -1,4 +1,5 @@
 import os
+from os.path import abspath
 import cv2
 import numpy as np
 
@@ -19,11 +20,11 @@ class ComputerVision(DebugAbstractClass):
         """finds the bounding box that contains the template image in a screen shot taken
         :returns: tuple of x1, y1, x2, y2
         """
-        template_image_path = os.path.abspath(template_image_path)
+        template_image_path = abspath(template_image_path)
         image_path = 'gmfs_tmp.png'
 
         # take screenshot
-        image_path = self.picture_input.get_image(image_path)
+        image_path = abspath(self.picture_input.get_image(image_path))
 
         ### Modified Example from OpenCV Template Matching Example ###
         # https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_template_matching/py_template_matching.html
@@ -45,6 +46,6 @@ class ComputerVision(DebugAbstractClass):
 
         if self.debug or write_output_image:
             cv2.imwrite('res.png', img_rgb)
-        os.remove(image_path)
+        self.picture_input.clean()
 
         return regions

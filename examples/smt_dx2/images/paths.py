@@ -5,6 +5,8 @@ class Images:
     __dir = dirname(__file__)
     __dir_demons_turn = join(__dir, 'demons_turn')
     __dir_demons_status = join(__dir, 'demons_status')
+    __dir_demons_party_portrait = join(__dir, 'demons_party_portrait')
+    __dir_ui = join(__dir, 'ui')
 
     # duel lobby
     duel = join(__dir, 'duel.png')
@@ -23,7 +25,7 @@ class Images:
     apocalypse = join(__dir, 'apocalypse.PNG')
 
     # demons status
-    concentrate_status = join(__dir_demons_status, 'concentrate2.PNG')  # alt: 'concentrate.png'
+    concentrate_status = join(__dir_demons_status, 'concentrate3.PNG')  # alt: 'concentrate.png'
 
     # fame exchange
     exchange_100 = join(__dir, 'ex-100.PNG')
@@ -31,6 +33,10 @@ class Images:
     # general ui
     next = join(__dir, 'next.png')
     close = join(__dir, 'close.PNG')
+
+    # other ui
+    one = join(__dir_ui, '001.PNG')
+    two = join(__dir_ui, '002.PNG')
 
     # portraits of demons when the current turn is their tur
     trump = join(__dir_demons_turn, 'trump.PNG')
