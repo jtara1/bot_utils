@@ -15,13 +15,13 @@ class PictureInPicture:
         self.ignore_template_not_found = ignore_template_not_found
         self.vision = ComputerVision(image_similarity_threshold=image_similarity_threshold, picture_input=picture_input)
 
-    def _get_regions(self, img_path):
+    def get_regions(self, img_path):
         """finds all instances of the image & returns the regions"""
         return self.vision.get_matches_from_screen(img_path, write_output_image=True)
 
     def has_image(self, img_path):
         """image is present"""
-        return not not self._get_regions(img_path)
+        return not not self.get_regions(img_path)
 
     async def has_image_within_period(self, img_path, time_period=3.5, frequency_for_check=0.1):
         """image is present within period of time
@@ -42,7 +42,7 @@ class PictureInPicture:
     def click(self, img_path, double_click=False):
         logger.debug('attempting to click %s', basename(img_path))
 
-        regions = self._get_regions(img_path)
+        regions = self.get_regions(img_path)
 
         if not regions:
             msg = 'template image not found: {}'.format(img_path)
@@ -66,7 +66,7 @@ class PictureInPicture:
         start = time()
 
         # falsey value for timeout, inf loop & attempts; otherwise, timeout after some time
-        while not timeout or (time() - start) / 1000 <= timeout:
+        while not timeout or (time() - start) <= timeout:
             try:
                 self.click(img_path, double_click)
                 break

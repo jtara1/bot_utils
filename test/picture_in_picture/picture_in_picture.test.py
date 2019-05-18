@@ -20,7 +20,7 @@ class TestPip(unittest.TestCase):
         )
         has_img = picture.has_image(Images.concentrate_status)
 
-        print(f'has concentrate status image: {has_img}')
+        print(f'has demon concentrate status effect image: {has_img}')
         self.assertEqual(has_img, True)
 
         # next test
@@ -44,6 +44,18 @@ class TestPip(unittest.TestCase):
         )
         has_img = picture.has_image(Images.two)
         print(f'hells park has darkened template: {has_img}')
+        self.assertTrue(has_img)
+
+    def test_darkened_template_scaled_up(self):
+        game_img = abspath(join(__file__, '../..', 'images/game-hp-scaled-up.PNG'))
+        load_img = LoadImage(game_img)
+        print(f'using {game_img}')
+
+        picture = PictureInPicture(
+            ignore_template_not_found=True, image_similarity_threshold=0.90, picture_input=load_img
+        )
+        has_img = picture.has_image(Images.two)
+        print(f'hells park has darkened template in scaled up img: {has_img}')
         self.assertTrue(has_img)
 
 
