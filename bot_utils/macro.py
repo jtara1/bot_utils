@@ -2,6 +2,8 @@ import keyboard
 import time
 import threading
 
+from bot_utils import logger
+
 
 class Macro(threading.Thread):
     def __init__(self, hotkey):
@@ -29,6 +31,7 @@ class Macro(threading.Thread):
         should be ready to repeatedly do some action
         """
         self.thread.start()
+        logger.verbose(f'{self.__class__.__name__}: started macro')
 
     def _run_repeatedly(self):
         """Does the action over and over again
@@ -56,3 +59,4 @@ class Macro(threading.Thread):
         with any hotkeys created
         """
         self._stop_event.set()
+        logger.verbose(f'{self.__class__.__name__}: stopped macro')
