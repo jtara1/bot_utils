@@ -56,7 +56,7 @@ class ComputerVision(DebugAbstractClass):
             # matching to find the template in the image
             edged = cv2.Canny(resized, 50, 200)
             result = cv2.matchTemplate(edged, template, cv2.TM_CCOEFF)
-            (_, max_val, _, max_loc) = cv2.minMaxLoc(result)
+            (_, max_val, _, max_loc) = cv2.minMaxLoc(result)  # finds the most similar match
 
             # check to see if the iteration should be visualized
             # draw a bounding box around the detected region
