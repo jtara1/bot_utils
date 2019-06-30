@@ -1,7 +1,8 @@
 click
-cv2
+keyboard
+mouse
+opencv-python
 numpy
 pyautogui
-mouse
 git+https://github.com/jtara1/jtara1_util
 imutils

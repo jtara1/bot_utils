@@ -1,7 +1,7 @@
 import mouse
 
 from bot_utils.deprecated.image_template_matching import get_matches_from_screen
-from bot_utils.exceptions import TemplateImageNotFound
+from bot_utils.lib.exceptions import TemplateImageNotFound
 
 
 def click(img_path, double_click=False):

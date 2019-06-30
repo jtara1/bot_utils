@@ -6,7 +6,7 @@ from bot_utils import logger
 from bot_utils.picture_in_picture.computer_vision import ComputerVision
 from bot_utils.picture_in_picture.region import Region
 from bot_utils.picture_in_picture.picture_input import Screenshot
-from bot_utils.exceptions import TemplateImageNotFound
+from bot_utils.lib.exceptions import TemplateImageNotFound
 
 
 class PictureInPicture:
