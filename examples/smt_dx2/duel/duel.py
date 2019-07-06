@@ -1,8 +1,8 @@
 from time import sleep
 
 from bot_utils import click, double_click as doubleClick
-from bot_utils.lib.decorators import ignore_exception
-from bot_utils.lib.exceptions import TemplateImageNotFound
+from bot_utils.utils.decorators import ignore_exception
+from bot_utils.utils.exceptions import TemplateImageNotFound
 from bot_utils.utils import unpack_methods
 
 from examples.smt_dx2.images.paths import Images
