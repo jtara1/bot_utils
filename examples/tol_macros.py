@@ -3,7 +3,7 @@ import time
 import mouse
 import click
 
-from bot_utils.macro import Macro
+from bot_utils.macros.macro import Macro
 
 
 class Pickup(Macro):

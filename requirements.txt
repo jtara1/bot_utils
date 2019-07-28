@@ -6,3 +6,5 @@ numpy
 pyautogui
 git+https://github.com/jtara1/jtara1_util
 imutils
+tempfile
+loguru

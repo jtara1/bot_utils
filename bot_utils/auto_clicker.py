@@ -2,7 +2,7 @@ from time import sleep
 
 import mouse
 
-from bot_utils.macro import Macro
+from bot_utils.macros.macro import Macro
 
 
 class AutoClicker(Macro):
