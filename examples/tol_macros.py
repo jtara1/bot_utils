@@ -3,10 +3,10 @@ import time
 import mouse
 import click
 
-from bot_utils.macros.macro import Macro
+from bot_utils.macros.macro_abc import MacroAbstractClass
 
 
-class Pickup(Macro):
+class Pickup(MacroAbstractClass):
     def __init__(self, hotkey='F2'):
         """
         Presses f repeatedly which picks up loot
@@ -18,7 +18,7 @@ class Pickup(Macro):
         keyboard.press_and_release('f')
 
 
-class Digger(Macro):
+class Digger(MacroAbstractClass):
     def __init__(self, hotkey='F3'):
         """
         Digs dirt in a certain online game
@@ -33,7 +33,7 @@ class Digger(Macro):
         time.sleep(3)  # approx time to dig in game
 
 
-class Walker(Macro):
+class Walker(MacroAbstractClass):
     def __init__(self, hotkey='F4'):
         """
         Walks forward until disabled

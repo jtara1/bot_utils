@@ -2,10 +2,10 @@ from time import sleep
 
 import mouse
 
-from bot_utils.macros.macro import Macro
+from bot_utils.macros.macro_abc import MacroAbstractClass
 
 
-class AutoClicker(Macro):
+class AutoClicker(MacroAbstractClass):
     def __init__(self, click_period=1, hotkey='f2'):
         super().__init__(hotkey)
         self.action_delay = 0

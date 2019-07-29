@@ -5,7 +5,7 @@ import threading
 from bot_utils import logger
 
 
-class Macro(threading.Thread):
+class MacroAbstractClass(threading.Thread):
     def __init__(self, hotkey, termination_condition=lambda self: False):
         """
         Abstract class for macro
@@ -17,11 +17,13 @@ class Macro(threading.Thread):
         self.actions_done_count = 0
         self.termination_condition = termination_condition
 
+        self.class_name = self.__class__.__name__
         self.thread = threading.Thread(target=self._run_repeatedly)
         self.start()
         self._stop_event = threading.Event()
 
         self.create_hotkey()
+        super().__init__()
 
     def create_hotkey(self):
         keyboard.add_hotkey(
@@ -33,17 +35,16 @@ class Macro(threading.Thread):
         should be ready to repeatedly do some action
         """
         self.thread.start()
-        logger.debug(f'{self.__class__.__name__}: started macro')
+        logger.info(f'{self.class_name}: process begins - press {self.hotkey} to toggle recording')
 
     def _run_repeatedly(self):
         """Does the action over and over again
         until it's disabled
         """
-        while not self.terminate:
-            while self.enabled or not self.termination_condition(self):
-                # need to implement this in child class
+        while not self.terminate:  # run inf in the background
+            while self.enabled or not self.termination_condition(self):  # makes the macro toggle'able
                 try:
-                    self.do_action()
+                    self.do_action()  # need to implement this in child class
                     self.actions_done_count += 1
                     time.sleep(self.action_delay)
                 except KeyboardInterrupt:
@@ -51,15 +52,15 @@ class Macro(threading.Thread):
             time.sleep(1)
 
     def do_action(self):
-        raise Exception("Not implemented yet")
+        raise Exception('Not implemented yet')
 
     def toggle_enabled(self):
         self.enabled = not self.enabled
-        logger.debug("{} {}".format(self.__class__.__name__, str(self.enabled)))
+        logger.debug(f'{self.class_name}: enabled = {self.enabled}')
 
     def stop(self):
         """Stop the thread. We're no longer doing any action
         with any hotkeys created
         """
         self._stop_event.set()
-        logger.debug(f'{self.__class__.__name__}: stopped macro')
+        logger.info(f'{self.class_name}: process ends - stopped macro')
