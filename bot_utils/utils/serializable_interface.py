@@ -1,7 +1,7 @@
 class SerializableInterface:
     def serialize(self):
-        pass
+        raise Exception('not implemented')
 
     @staticmethod
     def deserialize(file_path):
-        pass
+        raise Exception('not implemented')

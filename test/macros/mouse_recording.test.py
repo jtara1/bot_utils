@@ -5,7 +5,6 @@ from bot_utils.macros.mouse_recording import MouseRecording
 
 
 class TestMouseRecording(unittest.TestCase):
-    """test picture in picture class"""
     def test_mouse_recording(self):
         recording = MouseRecording(
             [(1, 1, time()), (500, 500, time())],

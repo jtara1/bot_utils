@@ -1,9 +1,11 @@
 import sys
+from os.path import join, dirname
 from loguru import logger
 
 
 version = '0.0.1'
 package_name = 'bot_utils'
+module_dir = join(dirname(__file__))
 is_mac_os = sys.platform == 'darwin'
 
 if not is_mac_os:

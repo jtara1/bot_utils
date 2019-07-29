@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-from bot_utils import version, package_name
+from bot_utils import version, package_name  # TODO: dont import this, wont work
 
 package_config = {
     'name': package_name,

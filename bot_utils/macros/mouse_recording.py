@@ -1,5 +1,4 @@
-import mouse
-import tempfile
+from os.path import join, dirname, basename
 import json
 
 from bot_utils import package_name, logger
@@ -8,23 +7,20 @@ from bot_utils.utils.serializable_interface import SerializableInterface
 
 class MouseRecording(SerializableInterface, list):
     def __init__(self, *args, **kwargs):
-        self.file = tempfile.NamedTemporaryFile(mode='w+', prefix=f'{package_name}_', encoding='utf-8')
+        self.file_path = join(dirname(__file__), f'{package_name}_{self.__class__.__name__}_save.json')
         super().__init__(*args, **kwargs)
 
-    @property
-    def file_path(self):
-        return self.file.name
-
     def serialize(self):
-        valid_json = [list(value) for value in self]
-        json.dump(valid_json, self.file)
-        return self.file_path
+        with open(self.file_path, 'w') as file:
+            json.dump(self, file)  # tuples get converted to list
+            return self.file_path
 
     @staticmethod
     def deserialize(file_path):
         try:
-            recording = json.load(file_path)
-            return MouseRecording(recording)
-        except:
+            with open(file_path, 'r') as file:
+                recording = json.load(file)
+                return MouseRecording([tuple(r) for r in recording])
+        except FileNotFoundError:
             logger.warning(f'file not found: {file_path}')
             return MouseRecording()
