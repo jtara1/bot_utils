@@ -14,8 +14,8 @@ class MouseRecorder(MacroAbstractClass):
         super().__init__(hotkey)
 
     def do_action(self):
-        # has to be a mouse hotkey to stop mouse recording
         if not self.enabled:
+            # has to be a mouse hotkey to stop mouse recording
             self.mouse_recording = mouse.record(self.terminate_mouse_recording_hotkey, target_types=('up',))
 
     def toggle_enabled(self):
@@ -23,7 +23,6 @@ class MouseRecorder(MacroAbstractClass):
             mouse.click(self.terminate_mouse_recording_hotkey)
             sleep(1)
             self.stop()
-            sleep(2)
         super().toggle_enabled()
 
 
