@@ -6,8 +6,10 @@ from bot_utils.utils.serializable_interface import SerializableInterface
 
 
 class MouseRecording(SerializableInterface, list):
+    save_file = join(dirname(__file__), f'{package_name}_MouseRecording_save.json')
+
     def __init__(self, *args, **kwargs):
-        self.file_path = join(dirname(__file__), f'{package_name}_{self.__class__.__name__}_save.json')
+        self.file_path = MouseRecording.save_file
         super().__init__(*args, **kwargs)
 
     def serialize(self):
@@ -16,11 +18,13 @@ class MouseRecording(SerializableInterface, list):
             return self.file_path
 
     @staticmethod
-    def deserialize(file_path):
+    def deserialize(file_path=None):
+        path = file_path or MouseRecording.save_file
+
         try:
-            with open(file_path, 'r') as file:
+            with open(path, 'r') as file:
                 recording = json.load(file)
                 return MouseRecording([tuple(r) for r in recording])
         except FileNotFoundError:
-            logger.warning(f'file not found: {file_path}')
+            logger.warning(f'file not found: {path}')
             return MouseRecording()
