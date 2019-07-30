@@ -41,8 +41,8 @@ class MacroAbstractClass(threading.Thread):
         """Does the action over and over again
         until it's disabled
         """
-        while not self.terminate:  # run inf in the background
-            while self.enabled or not self.termination_condition(self):  # makes the macro toggle'able
+        while not self.terminate or not self.termination_condition(self):  # run inf in the background
+            while self.enabled:  # makes the macro toggle'able
                 try:
                     self.do_action()  # need to implement this in child class
                     self.actions_done_count += 1
@@ -62,5 +62,6 @@ class MacroAbstractClass(threading.Thread):
         """Stop the thread. We're no longer doing any action
         with any hotkeys created
         """
+        self.terminate = True
         self._stop_event.set()
         logger.info(f'{self.class_name}: process ends - stopped macro')

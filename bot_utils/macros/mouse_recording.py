@@ -1,6 +1,9 @@
 from os.path import join, dirname, basename
 import json
 
+import mouse
+from mouse._mouse_event import MoveEvent, ButtonEvent, WheelEvent
+
 from bot_utils import package_name, logger
 from bot_utils.utils.serializable_interface import SerializableInterface
 
@@ -24,7 +27,15 @@ class MouseRecording(SerializableInterface, list):
         try:
             with open(path, 'r') as file:
                 recording = json.load(file)
-                return MouseRecording([tuple(r) for r in recording])
+                return MouseRecording([MouseRecording.convert_tuple_to_event_tuple(r) for r in recording])
         except FileNotFoundError:
             logger.warning(f'file not found: {path}')
             return MouseRecording()
+
+    @staticmethod
+    def convert_tuple_to_event_tuple(sequence):
+        if len(sequence) == 2:
+            return WheelEvent(*sequence)
+        elif isinstance(sequence[0], str):
+            return ButtonEvent(*sequence)
+        return MoveEvent(*sequence)
