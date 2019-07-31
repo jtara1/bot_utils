@@ -54,9 +54,12 @@ class MacroAbstractClass(threading.Thread):
     def do_action(self):
         raise Exception('Not implemented yet')
 
-    def toggle_enabled(self):
-        self.enabled = not self.enabled
+    def set_enabled(self, enabled):
+        self.enabled = enabled
         logger.debug(f'{self.class_name}: enabled = {self.enabled}')
+
+    def toggle_enabled(self):
+        self.set_enabled(not self.enabled)
 
     def stop(self):
         """Stop the thread. We're no longer doing any action
