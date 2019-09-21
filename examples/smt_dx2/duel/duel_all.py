@@ -4,7 +4,7 @@ import mouse
 
 from duel import duel
 from bot_utils import click, double_click as doubleClick
-from examples.smt_dx2.images.paths import Images
+from examples.smt_dx2.images.images import Images
 
 # constants
 duel_prep_load = 4

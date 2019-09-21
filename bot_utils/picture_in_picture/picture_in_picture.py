@@ -40,7 +40,7 @@ class PictureInPicture:
         return False
 
     def click(self, img_path, double_click=False):
-        logger.debug('attempting to click %s', basename(img_path))
+        logger.debug('attempting to click %s' % basename(img_path))
 
         regions = self.get_regions(img_path)
 

@@ -72,7 +72,7 @@ class ComputerVision(DebugAbstractClass):
                 found = (max_val, max_loc, resize_ratio)
 
         if self.debug or write_output_image:
-            cv2.imwrite('res.png', img_rgb)
+            cv2.imwrite('debug.png', img_rgb)
         self.picture_input.clean()
 
         # unpack the bookkeeping variable and compute the (x, y) coordinates
