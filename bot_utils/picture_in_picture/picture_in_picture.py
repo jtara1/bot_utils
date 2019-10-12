@@ -52,7 +52,7 @@ class PictureInPicture:
 
         else:
             region = regions[0]
-            mouse.move(*region.center, duration=0.3)
+            mouse.move(*(region.center), duration=0.3)
             mouse.double_click() if double_click else mouse.click()
             return region
 
