@@ -1,12 +1,14 @@
 ### My ignores ###
-screenshots/
 
 # config with secrets / private keys
 conan_exiles_event_monitor_secrets.py
 
-# screenshot images saved for debugging 
+# screenshot images saved for debugging
+screenshots/
 res.png
 gmfs_tmp.png
+debug.png
+temp-pic-input.png
 
 ### End My ignores ###
 

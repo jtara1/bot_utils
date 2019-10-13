@@ -69,6 +69,7 @@ class PictureInPicture:
         while not timeout or (time() - start) <= timeout:
             try:
                 self.click(img_path, double_click)
+                sleep(0.1)
                 break
             except TemplateImageNotFound:
                 sleep(attempt_interval)

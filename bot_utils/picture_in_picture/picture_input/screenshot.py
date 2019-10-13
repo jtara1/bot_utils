@@ -1,6 +1,6 @@
 import os
 import shutil
-from os.path import join, basename
+from os.path import join, basename, abspath
 from time import time
 
 import pyautogui
@@ -19,7 +19,7 @@ class Screenshot(PictureInputAbstractClass):
         """
         super().__init__(*args, **kwargs)
 
-        self.screenshots_folder = join(__file__, '..', 'screenshots')
+        self.screenshots_folder = abspath(join(__file__, '..', 'screenshots'))
         os.makedirs(self.screenshots_folder, exist_ok=True)
 
         self.crop_region = Region(crop_region)
@@ -27,11 +27,11 @@ class Screenshot(PictureInputAbstractClass):
     def get_image(self, save_img_to_path='screenshot.png'):
         super().get_image(save_img_to_path)
 
-        pyautogui.screenshot(save_img_to_path, region=self.crop_region)
+        pyautogui.screenshot(self.img_path, region=self.crop_region)
         if self.debug:
-            extension = basename(save_img_to_path).split('.')[-1]
-            shutil.copyfile(save_img_to_path, join(self.screenshots_folder, f'{time()}.{extension}'))
-        return save_img_to_path
+            extension = basename(self.img_path).split('.')[-1]
+            shutil.copyfile(self.img_path, join(self.screenshots_folder, f'{time()}.{extension}'))
+        return self.img_path
 
     def update_region(self, region):
         offset_x, offset_y = [self.crop_region[0], self.crop_region[1]]

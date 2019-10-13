@@ -15,6 +15,10 @@ class Images:
     take_all = join(__dir_ui, 'take-all.PNG')
     take = join(__dir_ui, 'take.PNG')
 
+    # ui - skills
+    mount_up = join(__dir_ui, 'mount-up.PNG')
+    mount_down = join(__dir_ui, 'mount-down.PNG')
+
     # items
     t6_fletcher_journal = join(__dir_items, 't6-fletcher-journal.PNG')
     t6_tinker_journal = join(__dir_items, 't6-tinker-journal.PNG')

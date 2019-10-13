@@ -26,7 +26,7 @@ class ComputerVision(DebugAbstractClass):
         template_image_path = abspath(template_image_path)
 
         # take screenshot
-        image_path = abspath(self.picture_input.get_image('temp-pic-input.png'))
+        image_path = self.picture_input.get_image('temp-pic-input.png')
 
         # load the image image, convert it to grayscale, and detect edges
         template = cv2.imread(template_image_path)
@@ -73,7 +73,7 @@ class ComputerVision(DebugAbstractClass):
         normalized = match_result / np.linalg.norm(match_result)
         (_, normalized_max_value, _, _) = cv2.minMaxLoc(normalized)  # finds the most similar match
 
-        if normalized_max_value <= 0.012:
+        if normalized_max_value <= 0.0117:
             raise TemplateImageNotFound(f'template img not found: {basename(template_image_path)}')
 
         (startX, startY) = (int(match_location[0] * resize_ratio), int(match_location[1] * resize_ratio))
