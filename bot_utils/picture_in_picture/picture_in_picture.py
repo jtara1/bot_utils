@@ -64,12 +64,15 @@ class PictureInPicture:
     async def click_asap(self, img_path, double_click=False, timeout=0, attempt_interval=0.2):
         """click as soon as possible"""
         start = time()
+        region = Region()
 
         # falsey value for timeout, inf loop & attempts; otherwise, timeout after some time
         while not timeout or (time() - start) <= timeout:
             try:
-                self.click(img_path, double_click)
-                sleep(0.1)
+                region = self.click(img_path, double_click)
+                sleep(0.15)
                 break
             except TemplateImageNotFound:
                 sleep(attempt_interval)
+
+        return region

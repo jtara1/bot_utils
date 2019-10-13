@@ -8,7 +8,6 @@ from bot_utils.picture_in_picture.image.rgb_color import RGBColor
 class ImageAnalytics:
     def __init__(self, image_file_path, crop_region=None):
         self.image_file_path = image_file_path
-        # self.image = cv2.imread(image_file_path)
         self.image = io.imread(image_file_path)
 
         if crop_region:
